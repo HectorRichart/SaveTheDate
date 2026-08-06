@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Héctor &amp; Sofía · Invitación de Boda · 7 de noviembre 2026</title>
+<title>Sofía &amp; Héctor · Invitación de Boda · 7 de noviembre 2026</title>
 
-<meta property="og:title" content="Héctor & Sofía · 7 de noviembre 2026">
+<meta property="og:title" content="Sofía & Héctor · 7 de noviembre 2026">
 <meta property="og:description" content="Nos casamos. Confirma tu asistencia y recibe tu pase digital.">
 <meta property="og:type" content="website">
 
@@ -20,6 +20,9 @@
   --gold-glow:rgba(201,162,39,.35);
   --wax:#6e1f2a;
   --wax-light:#8c2b38;
+  --olivo:#6b7a4f;
+  --olivo-light:#8fa06a;
+  --olivo-dark:#3a4529;
   --ink:#0b0b0c;
   --ink-2:#141416;
   --paper:#f6efe2;
@@ -159,13 +162,20 @@ img{max-width:100%;display:block}
 .wax{
   position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) translateZ(21px);
   width:clamp(60px,17%,96px);aspect-ratio:1;border-radius:50%;z-index:6;
-  background:radial-gradient(circle at 34% 30%,var(--wax-light),var(--wax) 62%,#4d141c 100%);
-  box-shadow:0 6px 16px rgba(0,0,0,.45),inset 0 0 12px rgba(0,0,0,.35);
+  background:radial-gradient(circle at 34% 30%,var(--olivo-light),var(--olivo) 60%,var(--olivo-dark) 100%);
+  box-shadow:0 6px 16px rgba(0,0,0,.45),inset 0 0 12px rgba(0,0,0,.32);
   display:grid;place-items:center;
-  font-family:'Pinyon Script',cursive;font-size:clamp(1.5rem,4.6vw,2.3rem);color:#f0d9a8;
   transition:transform .45s ease,opacity .45s ease;
 }
-.wax::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(240,217,168,.35)}
+.wax::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(243,236,216,.4)}
+/* iniciales grabadas en la cera: serif ancha para que se lean de lejos */
+.wax span{
+  display:flex;align-items:baseline;
+  font-family:'Cormorant Garamond',serif;font-weight:600;
+  font-size:clamp(1.3rem,3.7vw,1.95rem);letter-spacing:.02em;line-height:1;
+  color:#f7f2e2;text-shadow:0 1px 1px rgba(0,0,0,.45),0 -1px 0 rgba(255,255,255,.18);
+}
+.wax span i{font-family:'Pinyon Script',cursive;font-style:normal;font-size:.66em;opacity:.85;margin:0 .07em}
 /* estado abierto */
 /* la solapa gira y el translateZ, al ir después del giro, la manda hacia atrás del sobre */
 #gate.opening .env-flap{transform:rotateX(-172deg) translateZ(15px);filter:none;z-index:1}
@@ -299,6 +309,13 @@ section{position:relative}
 }
 .count-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.1rem,7vw,3.2rem);font-weight:500;color:var(--gold-soft);line-height:1}
 .count-lab{margin-top:.4rem;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-dim)}
+/* cuenta regresiva cumplida */
+.count-done{
+  display:none;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:clamp(1.25rem,4.2vw,1.8rem);line-height:1.5;color:var(--gold-soft);
+  max-width:28ch;margin:2.4rem auto 0;
+}
+.count-done.on{display:block}
 
 /* itinerario / lugares */
 .venues{display:grid;gap:2.5rem;margin-top:3rem}
@@ -335,10 +352,34 @@ section{position:relative}
 .dress .sw{width:34px;height:34px;border-radius:50%;border:1px solid rgba(251,246,238,.2)}
 .dress .note{font-size:.85rem;color:var(--cream-dim);max-width:40ch;text-align:center}
 
+/* línea de tiempo */
+.timeline{position:relative;max-width:620px;margin:3rem auto 0;padding-left:2rem}
+.timeline::before{
+  content:"";position:absolute;left:5px;top:.6rem;bottom:.6rem;width:1px;
+  background:linear-gradient(180deg,transparent,var(--hair) 10%,var(--hair) 90%,transparent);
+}
+.tl-item{position:relative;padding-bottom:2.3rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:"";position:absolute;left:-2rem;top:.42rem;width:11px;height:11px;box-sizing:border-box;
+  border-radius:50%;background:var(--ink);border:1px solid var(--gold);
+}
+.tl-item:last-child::before{background:var(--gold);box-shadow:0 0 0 5px var(--gold-glow)}
+.tl-year{font-size:.64rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.tl-title{font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:400;margin:.2rem 0 .35rem;line-height:1.2}
+.tl-item:last-child .tl-title{color:var(--gold-soft)}
+.tl-text{font-size:.9rem;color:var(--cream-dim);max-width:46ch}
+
 /* galería */
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:2.5rem}
-.shot{position:relative;aspect-ratio:3/4;border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:#151517}
-.shot img{width:100%;height:100%;object-fit:cover}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2.5rem}
+.shot{position:relative;aspect-ratio:4/5;border:1px solid var(--hair);border-radius:10px;overflow:hidden;background:#151517}
+.shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+.shot:hover img{transform:scale(1.04)}
+.shot .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:2.2rem .95rem .85rem;
+  background:linear-gradient(0deg,rgba(11,11,12,.88),rgba(11,11,12,.4) 55%,transparent);
+  font-size:.6rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);
+}
 .shot .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1rem;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,246,238,.3)}
 
 /* RSVP */
@@ -371,6 +412,23 @@ section{position:relative}
 .form-msg{margin-top:1rem;font-size:.85rem;min-height:1.2em}
 .form-msg.err{color:#e88f8f}
 .form-msg.ok{color:var(--gold-soft)}
+
+/* aviso de que ya confirmaste (pase guardado en este celular) */
+.rsvp-back{
+  display:none;max-width:560px;margin:2.6rem auto 0;padding:1.6rem;text-align:center;
+  border:1px solid var(--hair);border-radius:16px;
+  background:linear-gradient(160deg,rgba(201,162,39,.09),rgba(255,255,255,.015));
+}
+.rsvp-back.on{display:block}
+.rsvp-back .rb-lab{font-size:.62rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.rsvp-back h3{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:1.7rem;margin:.5rem 0 .45rem}
+.rsvp-back p{font-size:.88rem;color:var(--cream-dim);max-width:40ch;margin:0 auto}
+.rsvp-back button{
+  margin-top:1.2rem;background:none;border:none;cursor:pointer;color:rgba(251,246,238,.45);
+  font-family:'Montserrat',sans-serif;font-size:.62rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;
+}
+.rsvp-back button:hover{color:var(--gold)}
 
 /* pase digital */
 .pass-wrap{max-width:420px;margin:2.6rem auto 0;display:none}
@@ -439,7 +497,11 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
   .map iframe{height:200px}
   .venue .links .btn{width:100%;justify-content:center}
 
-  .gallery{grid-template-columns:1fr 1fr;gap:.7rem}
+  .timeline{padding-left:1.7rem}
+  .tl-item::before{left:-1.7rem}
+  .tl-title{font-size:1.35rem}
+
+  .gallery{grid-template-columns:1fr;gap:.9rem}
   .shot .ph{font-size:.56rem;letter-spacing:.12em}
 
   .pass-actions .btn{width:100%;justify-content:center}
@@ -481,12 +543,12 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
           <div class="env-body"></div>
           <div class="letter">
             <p class="l-top">Nos casamos</p>
-            <p class="l-names">Héctor<span class="l-amp">&amp;</span>Sofía</p>
+            <p class="l-names">Sofía<span class="l-amp">&amp;</span>Héctor</p>
             <p class="l-date">07 · 11 · 2026</p>
           </div>
           <div class="env-front"><i class="bottom"></i><i class="left"></i><i class="right"></i></div>
           <div class="env-flap"></div>
-          <div class="wax">HS</div>
+          <div class="wax"><span>S<i>&amp;</i>H</span></div>
         </div>
        </div>
       </div>
@@ -500,12 +562,12 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
       <div class="paper">
         <p class="c-orn">&#10086;</p>
         <p class="c-lab">Nos casamos</p>
-        <h1 class="c-names">Héctor<span class="c-amp">&amp;</span>Sofía</h1>
+        <h1 class="c-names">Sofía<span class="c-amp">&amp;</span>Héctor</h1>
         <div class="c-rule"></div>
         <p class="c-date">Sábado 7 de noviembre de 2026</p>
         <div class="c-where">
           <p><strong>Parroquia María Reina del Universo</strong><br>Ceremonia · 5:00 p.m.</p>
-          <p><strong>Jardín Terraza Arjeri</strong><br>Recepción · 7:00 p.m.</p>
+          <p><strong>Jardín Terraza Arjeri</strong><br>Recepción · 9:00 p.m.</p>
         </div>
         <p class="c-verse">Maridos, amad a vuestras mujeres, así como Cristo amó a la iglesia…</p>
         <p class="c-ref">Efesios 5:25</p>
@@ -523,12 +585,12 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
 <section class="hero">
   <div class="hero-media">
     <!-- Cuando tengas la foto, borra el div .ph y descomenta el <img> -->
-    <!-- <img src="fotos/portada.jpg" alt="Héctor y Sofía"> -->
+    <!-- <img src="fotos/portada.jpg" alt="Sofía y Héctor"> -->
     <div class="ph"><span>fotos/portada.jpg</span></div>
   </div>
   <div class="hero-inner">
     <p class="eyebrow">Nuestra boda</p>
-    <h1 class="display hero-names">Héctor<span class="amp">&amp;</span>Sofía</h1>
+    <h1 class="display hero-names">Sofía<span class="amp">&amp;</span>Héctor</h1>
     <p class="hero-date">Sábado 7 de noviembre de 2026</p>
     <p class="hero-sub">Ciudad Juárez, Chihuahua</p>
   </div>
@@ -541,22 +603,23 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
 <section class="verse pad-sm">
   <div class="wrap center reveal">
     <p class="flourish">&#10086;</p>
-    <p class="quote">Maridos, amad a vuestras mujeres, así como Cristo amó a la iglesia…</p>
-    <p class="ref">Efesios 5:25</p>
+    <p class="quote">Y si alguien prevalece contra uno, dos le resistirán; y cordón de tres dobleces no se rompe pronto.</p>
+    <p class="ref">Eclesiastés 4:12</p>
   </div>
 </section>
 
 <!-- ============ CUENTA REGRESIVA ============ -->
 <section class="pad-sm">
   <div class="wrap center reveal">
-    <p class="eyebrow">Cuenta regresiva</p>
-    <h2 class="display sec-title">Nos vemos en <em>poco</em></h2>
-    <div class="count">
+    <p class="eyebrow" id="cdEyebrow">Cuenta regresiva</p>
+    <h2 class="display sec-title" id="cdTitle">Nos vemos en <em>poco</em></h2>
+    <div class="count" id="cdBox">
       <div class="count-item"><div class="count-num" id="cd-d">000</div><div class="count-lab">Días</div></div>
       <div class="count-item"><div class="count-num" id="cd-h">00</div><div class="count-lab">Horas</div></div>
       <div class="count-item"><div class="count-num" id="cd-m">00</div><div class="count-lab">Minutos</div></div>
       <div class="count-item"><div class="count-num" id="cd-s">00</div><div class="count-lab">Segundos</div></div>
     </div>
+    <p class="count-done" id="cdDone">Gracias por caminar con nosotros este día. Nos lo llevamos guardado para siempre.</p>
   </div>
 </section>
 
@@ -589,7 +652,7 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
       </article>
 
       <article class="venue reveal">
-        <p class="when">Recepción · 7:00 p.m.</p>
+        <p class="when">Recepción · 9:00 p.m.</p>
         <h3>Jardín Terraza Arjeri</h3>
         <p class="addr">Cam. Viejo a San José 4545, Las Arcadas,<br>32590 Juárez, Chihuahua</p>
         <div class="map">
@@ -615,11 +678,11 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
       <div class="swatches" aria-hidden="true">
         <span class="sw" style="background:#111318"></span>
         <span class="sw" style="background:#22313f"></span>
-        <span class="sw" style="background:#5b6b5d"></span>
         <span class="sw" style="background:#8c8172"></span>
         <span class="sw" style="background:#6e1f2a"></span>
       </div>
-      <p class="note">Vestido largo o midi para ellas, traje para ellos. Te pedimos reservar el blanco para la novia.</p>
+      <p class="note">Vestido largo o midi para ellas, traje para ellos.</p>
+      <p class="note" style="color:var(--gold-soft)">Dos colores apartados: el blanco es de la novia y el verde es de los acompañantes de los novios. Cualquier otro tono es bienvenido.</p>
       <a class="btn solid" href="#" id="calBtn">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         Agregar a calendario
@@ -628,18 +691,61 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
   </div>
 </section>
 
-<!-- ============ GALERÍA ============ -->
+<!-- ============ NOSOTROS ============ -->
 <section class="pad-sm">
   <div class="wrap">
     <div class="center reveal">
       <p class="eyebrow">Nosotros</p>
-      <h2 class="display sec-title">Un <em>poquito</em> de nuestra historia</h2>
+      <h2 class="display sec-title">Diez años en <em>siete</em> momentos</h2>
     </div>
-    <!-- Sustituye cada .ph por <img src="fotos/1.jpg" alt=""> cuando las tengas -->
+
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <p class="tl-year">2016</p>
+        <h3 class="tl-title">La primera vez</h3>
+        <p class="tl-text">Nos cruzamos sin planearlo, sin buscarnos. Ninguno de los dos sabía que esa era la primera página.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">2019</p>
+        <h3 class="tl-title">Otra vez tú</h3>
+        <p class="tl-text">Tres años después, de pura casualidad, volvimos a encontrarnos. La vida ya venía insistiendo.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">2022</p>
+        <h3 class="tl-title">La fiesta</h3>
+        <p class="tl-text">A la tercera dejamos de creer en las coincidencias. Le hablé, quedamos de salir, y esta vez no la dejé ir.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">Febrero 2023</p>
+        <h3 class="tl-title">Novios</h3>
+        <p class="tl-text">Le puse nombre a lo que ya era obvio para los dos.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">Octubre 2025</p>
+        <h3 class="tl-title">La pregunta, en Tokio</h3>
+        <p class="tl-text">Al otro lado del mundo, lejos de todo lo conocido, le pedí que se quedara conmigo para siempre. Dijo que sí.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">30 de julio de 2026</p>
+        <h3 class="tl-title">Ya es oficial</h3>
+        <p class="tl-text">Firmamos por el civil. Un papel que solo confirma lo que ya sabíamos.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">7 de noviembre de 2026</p>
+        <h3 class="tl-title">Ante Dios y ante ustedes</h3>
+        <p class="tl-text">Nos falta lo más importante: decirlo en voz alta, frente a Dios y frente a la gente que queremos. Aquí es donde entras tú.</p>
+      </div>
+    </div>
+
     <div class="gallery reveal">
-      <div class="shot"><div class="ph">fotos/1.jpg</div></div>
-      <div class="shot"><div class="ph">fotos/2.jpg</div></div>
-      <div class="shot"><div class="ph">fotos/3.jpg</div></div>
+      <div class="shot">
+        <img src="tokyo.jpg" alt="El compromiso en Tokio, octubre de 2025" loading="lazy">
+        <p class="cap">Tokio · Octubre 2025</p>
+      </div>
+      <div class="shot">
+        <img src="civil.jpg" alt="La boda civil, 30 de julio de 2026" loading="lazy">
+        <p class="cap">Civil · 30 de julio de 2026</p>
+      </div>
     </div>
   </div>
 </section>
@@ -653,7 +759,15 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
       <p class="sec-lead">Registra tu nombre y los pases que vas a usar. Al terminar te generamos tu pase digital para guardarlo en el celular.</p>
     </div>
 
-    <div class="form-card reveal">
+    <!-- aparece si ya confirmaste desde este celular -->
+    <div class="rsvp-back" id="rsvpBack">
+      <p class="rb-lab">Ya te tenemos apuntado</p>
+      <h3 id="rbName">—</h3>
+      <p id="rbText">—</p>
+      <button type="button" id="rbReset">Confirmar a otra persona</button>
+    </div>
+
+    <div class="form-card reveal" id="formCard">
       <form id="rsvpForm" novalidate>
         <div class="field">
           <label for="nombre">Nombre completo</label>
@@ -704,13 +818,13 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
       <div class="pass" id="pass">
         <div class="pass-top">
           <p class="p-lab">Pase de acceso</p>
-          <p class="p-names">Héctor <span>&amp;</span> Sofía</p>
+          <p class="p-names">Sofía <span>&amp;</span> Héctor</p>
         </div>
         <div class="pass-body">
           <div class="p-row"><span class="p-key">Invitado</span><span class="p-val" id="passName">—</span></div>
           <div class="p-row"><span class="p-key">Pases</span><span class="p-val big" id="passQty">—</span></div>
           <div class="p-row"><span class="p-key">Fecha</span><span class="p-val">Sáb 7 nov 2026</span></div>
-          <div class="p-row"><span class="p-key">Recepción</span><span class="p-val">Terraza Arjeri<br>7:00 p.m.</span></div>
+          <div class="p-row"><span class="p-key">Recepción</span><span class="p-val">Terraza Arjeri<br>9:00 p.m.</span></div>
           <div class="p-qr">
             <div class="qbox" id="qr"></div>
             <p class="folio" id="passFolio">—</p>
@@ -757,6 +871,10 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
         <p>El salón tiene estacionamiento amplio con valet.</p>
       </details>
       <details>
+        <summary>¿Perdí mi pase, qué hago?</summary>
+        <p>Si confirmaste desde este mismo celular, tu pase vuelve a aparecer solo al entrar de nuevo al sitio. Si cambiaste de teléfono o borraste el historial, escríbenos y te lo reenviamos.</p>
+      </details>
+      <details>
         <summary>¿Mesa de regalos?</summary>
         <p>Tu presencia es lo más importante. Si quieres tener un detalle con nosotros, habrá lluvia de sobres.</p>
       </details>
@@ -765,8 +883,8 @@ footer .tag{margin-top:1rem;font-size:.7rem;letter-spacing:.24em;text-transform:
 </section>
 
 <footer>
-  <p class="sig">Héctor &amp; Sofía</p>
-  <p class="tag">#HectorYSofia2026</p>
+  <p class="sig">Sofía &amp; Héctor</p>
+  <p class="tag">#SofiaYHector2026</p>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -780,7 +898,8 @@ const CONFIG = {
   // Si la dejas vacía, el formulario funciona en modo demo (no guarda nada).
   ENDPOINT: "https://script.google.com/macros/s/AKfycbxEkV985Kzv372ajrfXNi51criJ_karnNJKfR0_Z3AZr4Gvmx7Z95HlQxTMFKdf9WaT_w/exec",
   FECHA_EVENTO: "2026-11-07T17:00:00-07:00",  // ceremonia
-  MAX_PASES: 5
+  MAX_PASES: 5,
+  LS_KEY: "hs2026-pase"                        // dónde se guarda el pase en el celular
 };
 
 /* ---------- sobre → carta → sitio ---------- */
@@ -932,9 +1051,20 @@ const CONFIG = {
   const target = new Date(CONFIG.FECHA_EVENTO).getTime();
   const el = {d:document.getElementById('cd-d'),h:document.getElementById('cd-h'),
               m:document.getElementById('cd-m'),s:document.getElementById('cd-s')};
+  let timer = null;
+
+  // ya pasó la boda: los números se van y queda el agradecimiento
+  function terminado(){
+    if (timer) clearInterval(timer);
+    document.getElementById('cdBox').style.display = 'none';
+    document.getElementById('cdDone').classList.add('on');
+    document.getElementById('cdEyebrow').textContent = '07 · 11 · 2026';
+    document.getElementById('cdTitle').innerHTML = 'Ya somos <em>familia</em>';
+  }
+
   function tick(){
     const diff = target - Date.now();
-    if (diff <= 0){ el.d.textContent='000'; el.h.textContent=el.m.textContent=el.s.textContent='00'; return; }
+    if (diff <= 0){ terminado(); return; }
     const d = Math.floor(diff/86400000);
     const h = Math.floor(diff%86400000/3600000);
     const m = Math.floor(diff%3600000/60000);
@@ -944,7 +1074,8 @@ const CONFIG = {
     el.m.textContent = String(m).padStart(2,'0');
     el.s.textContent = String(s).padStart(2,'0');
   }
-  tick(); setInterval(tick, 1000);
+  tick();
+  timer = setInterval(tick, 1000);
 })();
 
 /* ---------- reveal al hacer scroll ---------- */
@@ -960,10 +1091,10 @@ window.addEventListener('resize', revealCheck);
 /* ---------- calendario ---------- */
 function calendarUrl(){
   const start = '20261107T170000';
-  const end   = '20261108T010000';
-  const text  = encodeURIComponent('Boda de Héctor y Sofía');
+  const end   = '20261108T020000';
+  const text  = encodeURIComponent('Boda de Sofía y Héctor');
   const loc   = encodeURIComponent('Parroquia María Reina del Universo, C. Lucero s/n, Parajes del Sol, Juárez, Chih.');
-  const det   = encodeURIComponent('Ceremonia 5:00 p.m. en la Parroquia María Reina del Universo. Recepción 7:00 p.m. en Jardín Terraza Arjeri. Vestimenta: formal.');
+  const det   = encodeURIComponent('Ceremonia 5:00 p.m. en la Parroquia María Reina del Universo. Recepción 9:00 p.m. en Jardín Terraza Arjeri. Vestimenta: formal.');
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${det}&location=${loc}&ctz=America/Ciudad_Juarez`;
 }
 ['calBtn','calBtn2'].forEach(id => {
@@ -1005,6 +1136,8 @@ document.querySelectorAll('input[name="asiste"]').forEach(r => {
 const form = document.getElementById('rsvpForm');
 const msg  = document.getElementById('formMsg');
 const submitBtn = document.getElementById('submitBtn');
+const formCard  = document.getElementById('formCard');
+const backBox   = document.getElementById('rsvpBack');
 
 function folioFor(nombre){
   let h = 0;
@@ -1054,6 +1187,8 @@ form.addEventListener('submit', async (e) => {
       await new Promise(r => setTimeout(r, 700)); // modo demo
     }
 
+    guardarLocal(payload);   // para que el pase siga aquí si cierra la página
+
     msg.className = 'form-msg ok';
     msg.textContent = asiste === 'Sí'
       ? '¡Listo! Guarda tu pase, te lo van a pedir en la entrada.'
@@ -1070,7 +1205,7 @@ form.addEventListener('submit', async (e) => {
 });
 
 /* ---------- pase digital ---------- */
-function showPass(p){
+function showPass(p, mover = true){
   document.getElementById('passName').textContent = p.nombre;
   document.getElementById('passQty').textContent = p.pases;
   document.getElementById('passFolio').textContent = 'Folio ' + p.folio;
@@ -1094,8 +1229,44 @@ function showPass(p){
   }
   const wrap = document.getElementById('passWrap');
   wrap.classList.add('show');
-  wrap.scrollIntoView({behavior:'smooth', block:'center'});
+  if (mover) wrap.scrollIntoView({behavior:'smooth', block:'center'});
 }
+
+/* ---------- el pase se queda guardado en el celular ---------- */
+function guardarLocal(p){
+  try {
+    localStorage.setItem(CONFIG.LS_KEY, JSON.stringify({
+      folio: p.folio, nombre: p.nombre, pases: p.pases, asiste: p.asiste
+    }));
+  } catch(e){ /* modo privado o sin espacio: no pasa nada */ }
+}
+function leerLocal(){
+  try { return JSON.parse(localStorage.getItem(CONFIG.LS_KEY) || 'null'); }
+  catch(e){ return null; }
+}
+
+(function restaurarPase(){
+  const p = leerLocal();
+  if (!p || !p.nombre) return;
+
+  formCard.style.display = 'none';
+  backBox.classList.add('on');
+  document.getElementById('rbName').textContent = p.nombre;
+
+  if (p.asiste === 'Sí'){
+    document.getElementById('rbText').textContent =
+      'Tu pase está aquí abajo, tal como lo dejaste. Te lo van a pedir en la entrada.';
+    showPass(p, false);
+  } else {
+    document.getElementById('rbText').textContent =
+      'Ya nos avisaste que no vas a poder acompañarnos. Te vamos a extrañar.';
+  }
+})();
+
+document.getElementById('rbReset').addEventListener('click', () => {
+  try { localStorage.removeItem(CONFIG.LS_KEY); } catch(e){}
+  location.reload();
+});
 
 document.getElementById('dlBtn').addEventListener('click', async () => {
   const node = document.getElementById('pass');
@@ -1104,7 +1275,7 @@ document.getElementById('dlBtn').addEventListener('click', async () => {
     const canvas = await html2canvas(node, {backgroundColor:'#0b0b0c', scale:2, useCORS:true});
     const a = document.createElement('a');
     a.href = canvas.toDataURL('image/png');
-    a.download = 'pase-boda-hector-sofia.png';
+    a.download = 'pase-boda-sofia-hector.png';
     a.click();
   } catch (err){
     console.error(err);
